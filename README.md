@@ -7,4 +7,10 @@ Lien vers le firwmare pour K1C :
 https://www.crealitycloud.com/downloads/firmware/flagship-series/k1c
 
 Wiki officiel Creality :
-https://wiki.creality.com/en/k1-flagship-series
+https://wiki.creality.com/en/k1-flagship-serieshttps://wiki.creality.com/en/k1-flagship-series
+
+ Firmware recovery tool :
+ https://github.com/CrealityOfficial/K1_Series_Annex/releases/tag/V1.0.0
+
+ Release :
+ https://github.com/CrealityOfficial/K1_Series_Klipper/releases
