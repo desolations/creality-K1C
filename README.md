@@ -14,3 +14,6 @@ https://wiki.creality.com/en/k1-flagship-serieshttps://wiki.creality.com/en/k1-f
 
  Release :
  https://github.com/CrealityOfficial/K1_Series_Klipper/releases
+
+ Klipper :
+ https://github.com/Guilouz/Creality-Helper-Script-Wiki
