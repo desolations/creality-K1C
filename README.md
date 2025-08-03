@@ -17,3 +17,6 @@ https://wiki.creality.com/en/k1-flagship-serieshttps://wiki.creality.com/en/k1-f
 
  Klipper :
  https://github.com/Guilouz/Creality-Helper-Script-Wiki
+
+ Root and Install Klipper to Creality K1C :
+ https://guilouz.github.io/Creality-Helper-Script-Wiki/firmwares/install-and-update-rooted-firmware-k1/
