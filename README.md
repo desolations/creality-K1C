@@ -72,3 +72,5 @@ Vous pouvez installer les derniers micrologiciels ci-dessous.
    - Improvements
    - Camera
    - Remote access
+
+Fichier pour passer les test au premier démarrage ou après mise à jours du firmware. Nom du fichier à copier sur clé usb à la racine sans mettre d'extension au fichier : " debugmode_JumpSelftest "
