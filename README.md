@@ -1,76 +1,103 @@
 # creality-K1C
 
-Fichiers d'origine clé USB :
-https://drive.google.com/file/d/1fL6c-QzP4bHb-R6DtrqvfmHobE6odOhC/view?usp=drive_link
+📚 Ressources, Root et Astuces pour Creality K1C
 
-Lien vers le firwmare pour K1C :
-https://www.crealitycloud.com/downloads/firmware/flagship-series/k1c
+Ce document regroupe les liens officiels, les procédures de mise à jour strictes, le root, et des astuces pour bypass les tests forcés au démarrage.
+🔗 Liens Utiles et Officiels
 
-Wiki officiel Creality :
-https://wiki.creality.com/en/k1-flagship-serieshttps://wiki.creality.com/en/k1-flagship-series
+    Fichiers d'origine clé USB (Dump intégral) : Google Drive
+    Firmware officiel K1C : Creality Cloud
+    Wiki officiel Creality : wiki.creality.com
+    Firmware Recovery Tool (Outil de récupération officiel) : GitHub Creality
+    Releases Officielles Klipper (K1 Series) : GitHub Creality
 
- Firmware recovery tool :
- https://github.com/CrealityOfficial/K1_Series_Annex/releases/tag/V1.0.0
+⚠️ Procédure de mise à jour stricte
 
- Release :
- https://github.com/CrealityOfficial/K1_Series_Klipper/releases
+Veuillez suivre l'instruction ci-dessous strictement avant d'installer le dernier micrologiciel. Sinon, l'installation du dernier micrologiciel risque d'échouer et de briquer l'imprimante.
 
- Klipper :
- https://github.com/Guilouz/Creality-Helper-Script-Wiki
+    Pour les micrologiciels V1.2.9.14 et antérieurs :
+        Mettre à jour vers V1.2.9.15 (via USB Drive)
+        Mettre à jour vers V1.2.9.22 (via OTA/USB Drive)
+        Mettre à jour vers V1.3.0.30 (via OTA/USB Drive)
+        Mettre à jour vers V1.3.1.4 (via USB Drive ou Creality Cloud APP)
 
- Root and Install Klipper to Creality K1C :
- https://guilouz.github.io/Creality-Helper-Script-Wiki/firmwares/install-and-update-rooted-firmware-k1/
+    Pour les micrologiciels V1.2.9.17 à 1.2.9.21 :
+        Mettre à jour vers V1.2.9.22 (via OTA/USB Drive)
+        Mettre à jour vers V1.3.0.30 (via OTA/USB Drive)
+        Mettre à jour vers V1.3.1.4 (via USB Drive ou Creality Cloud APP)
 
- Install via script :
- https://guilouz.github.io/Creality-Helper-Script-Wiki/helper-script/helper-script-installation/
+    Pour le micrologiciel V1.3.0.30 :
+        Mettre à jour vers V1.3.1.4 (via USB Drive ou Creality Cloud APP)
 
-Veuillez suivre l'instruction ci-dessous strictement avant d'installer le dernier micrologiciel. Sinon, l'installation du dernier micrologiciel risque de faire faillite.
+    Pour les micrologiciels V1.3.1.4 et au-dessus :Vous pouvez installer les derniers micrologiciels directement.
 
-Pour les micrologiciels V1.2.9.14 et antérieurs:
- :: Mise à jour de V1.2.9.15via USB Drive
- :: Mise à jour de V1.2.9.22via OTA/USB Drive
- :: Mise à jour de V1.3.30via OTA/USB Drive
- :: Mise à jour de V1.3.1.4via USB Drive ou à partir de Creality Cloud APP
+🔓 Root et installation du Helper Script (Guilouz)
 
-Pour le micrologiciel V1.2.9.17 à 1.2.9.21:
- :: Mise à jour de V1.2.9.22via OTA/USB Drive
- :: Mise à jour de V1.3.30via OTA/USB Drive
- :: Mise à jour de V1.3.1.4via USB Drive ou à partir de Creality Cloud APP
+Le Helper Script de Guilouz est indispensable pour débloquer le plein potentiel de la K1C (ajout de modules, Camera, Remote Access, etc.).
+1. Activer le Root
 
-Pour le micrologiciel V1.3.0.30:
- :: Mise à jour de V1.3.1.4via USB Drive ou à partir de Creality Cloud APP
+    Sur l'écran de l'imprimante : "Paramètre" ==> "Information du compte root" ==> patienter 30 secondes ==> "Oui".
 
-Pour les micrologiciels V1.3.1.4 et au-dessus:
-Vous pouvez installer les derniers micrologiciels ci-dessous.
+2. Connexion SSH
 
+Connectez-vous en SSH à l'imprimante (via PuTTY ou MobaXterm).
 
-1) ROOT :
+    Utilisateur : root
+    Mot de passe : creality_2023 (Note : sur certaines versions, le mot de passe est simplement creality).
 
-   "Paramètre" ==> "information du compte root" ==> patienter 30s ==> "oui"
+3. Installation du script
 
-2) SSH connect
+Dans le terminal SSH, rendez-vous dans le dossier des données utilisateur :
 
-   user = " root "
-   password = " creality_2023 "
+cd /usr/data
 
-3) Folder
-  go to folder " usr/data "
+Clonez le dépôt du script (en profondeur 1 pour aller plus vite) :
+bash
+ 
+  
+ 
+ 
+git clone --depth 1 https://github.com/Guilouz/Creality-Helper-Script.git /usr/data/helper-script
+ 
+ 
 
-4) GIT
-   paste :
-   git clone --depth 1 https://github.com/Guilouz/Creality-Helper-Script.git /usr/data/helper-script
+Lancez le script d'installation :
+bash
+ 
+  
+ 
+ 
+sh /usr/data/helper-script/helper.sh
+ 
+ 
 
-   run :
-   sh /usr/data/helper-script/helper.sh
+⚠️ Si vous rencontrez une erreur de clone (problème de certificat SSL), entrez cette commande avant de relancer le git clone :
+bash
+ 
+  
+ 
+ 
+git config --global http.sslVerify false
+ 
+ 
+4. Modules recommandés à installer
 
-   If you encounter an issue to clone Helper Script repository, enter this command before cloning:
-   git config --global http.sslVerify false
+Une fois dans le menu du Helper Script, installez les modules de votre choix :
 
-5) Install
-   - Essentials
-   - Utilities
-   - Improvements
-   - Camera
-   - Remote access
+     Essentials (KlipperScreen, etc.)
+     Utilities (Mainsail, Fluiss, etc.)
+     Improvements
+     Camera
+     Remote access
 
-Fichier pour passer les test au premier démarrage ou après mise à jours du firmware. Nom du fichier à copier sur clé usb à la racine sans mettre d'extension au fichier : " debugmode_JumpSelftest "
+🛠️ Astuces de Premier Démarrage (Bypass Selftest)
+
+Pour passer les tests forcés au premier démarrage ou après une mise à jour du firmware, vous pouvez utiliser un fichier de débogage.
+
+Procédure :
+
+    Prenez un fichier texte vide sur votre PC.
+    Renommez-le exactement : debugmode_JumpSelftest
+    ATTENTION : Assurez-vous qu'il n'a aucune extension (pas de .txt à la fin). Si Windows cache les extensions, affichez-les dans l'explorateur pour être sûr.
+    Copiez ce fichier à la racine de votre clé USB.
+    Branchez la clé USB sur l'imprimante et allumez-la. Les tests de calibrage forcés seront automatiquement ignorés.
