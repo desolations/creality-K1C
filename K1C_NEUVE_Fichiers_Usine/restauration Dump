@@ -1,0 +1,90 @@
+🛠️ Restauration Usine Carte Mère Creality K1/K1C (CR4CU220812S12)
+
+Ce dépôt contient une sauvegarde intégrale (dump bit à bit) et les firmwares d'usine de la carte mère Creality CR4CU220812S12, telle qu'elle sort de l'usine. 
+
+Si votre imprimante K1 ou K1C a été "brickée" (écran noir, blocage sur le logo, erreur fatale) suite à une mise à jour (notamment liée aux kits CFS/CFS-Pro), ce guide vous permet de la restaurer dans son état d'origine.
+📋 Prérequis (Sous Windows)
+
+    Un PC sous Windows.
+    Une clé USB formatée en exFAT ou FAT32.
+    Un câble USB-C (ou Micro-USB selon votre configuration) pour relier l'imprimante à votre PC.
+    Git pour Windows installé (pour utiliser la commande git clone).
+    Le logiciel BalenaEtcher installé.
+    (Optionnel pour le flash MCU) Un programmateur ST-Link V2.
+
+Étape 1 : Téléchargement des fichiers d'usine
+
+Pour restaurer votre imprimante, vous avez besoin de deux choses : les fichiers de configuration (sur GitHub) et l'image disque complète (sur le Cloud).
+1. Télécharger les firmwares et configurations (via Git)
+
+Ouvrez l'invite de commande Windows (touche Windows + R, tapez cmd et faites Entrée) ou PowerShell. Déplacez-vous dans le dossier où vous voulez télécharger les fichiers (ex: cd Desktop), puis tapez :
+
+git clone https://github.com/desolations/creality-K1C.gitcd creality-K1C
+
+Vous y trouverez le dossier K1C_NEUVE_Fichiers_Usine contenant les firmwares séparés (MCU, Bed, Nozzle) et les configurations Klipper d'usine.
+2. Télécharger l'image disque complète (8 Go)
+
+La carte mère complète étant trop volumineuse pour GitHub, elle est hébergée sur Google Drive. Le fichier est au format brut (.img) pour garantir une intégrité parfaite sans risque de corruption d'archive :
+
+👉 LIEN DE TÉLÉCHARGEMENT GOOGLE DRIVE https://drive.google.com/file/d/1V5rKf7qVGHebyHTNMX8MqmtMlAvo95me/view?usp=sharing
+
+(Une fois téléchargé, vous obtiendrez directement le fichier K1C_NEUVE_Usine_8Go.img prêt à être flashé).
+Étape 2 : Choisissez votre méthode de restauration
+
+Selon l'état de votre imprimante, trois solutions s'offrent à vous.
+Méthode A : Restauration complète (Imprimante totalement brickée / Écran noir)
+
+Utilisez cette méthode si le système Linux ne démarre plus du tout.
+
+    Préparez la clé USB : Flasher ce fichier .img sur votre carte mère via le mode récupération (MaskROM) nécessite l'outil officiel Rockchip (RKDevTool). 
+    Mode MaskROM : 
+         Éteignez l'imprimante et débranchez-la.
+         Ouvrez le capot de la carte mère.
+         Localisez les pastilles MASKROM (référez-vous à la documentation de votre carte).
+         Faites contact entre ces deux pastilles avec une pince métallique.
+         Branchez le câble USB entre l'imprimante et le PC, puis branchez l'alimentation. Le PC doit détecter un périphérique "MaskROM".
+    Flashage : Utilisez le logiciel RKDevTool (ou BalenaEtcher si la méthode USB directe est supportée par votre carte) pour écrire le fichier .img à l'adresse 0x0 de la mémoire eMMC.
+    Une fois terminé, débranchez, retirez la pince, et redémarrez. L'imprimante est comme neuve.
+
+Méthode B : Restauration des Firmwares uniquement (Système OK mais erreurs MCU)
+
+Utilisez cette méthode si l'interface web s'allume, mais que vous avez des erreurs de communication avec la carte mère (MCU) ou la tête d'impression.
+
+    Copiez les fichiers .bin situés dans le dossier K1C_NEUVE_Fichiers_Usine/Firmwares_Usine/K1/ à la racine de votre clé USB.
+    Branchez la clé USB sur l'imprimante allumée.
+    Connectez-vous en SSH à l'imprimante (via Putty, identifiants root / creality).
+    Identifiez votre clé USB avec la commande df -h (souvent /tmp/udisk/sda1).
+    Copiez les fichiers dans le dossier système de Klipper avec cette commande :
+    bash
+     
+      
+     
+     
+    cp /tmp/udisk/sda1/*.bin /usr/share/klipper/fw/K1/
+     
+     
+    Redémarrez l'imprimante : reboot
+
+Méthode C : Restauration des configurations Klipper d'usine
+
+Si vos fichiers de configuration (printer.cfg, etc.) sont corrompus :
+
+    Copiez le dossier Config_Klipper_Usine sur une clé USB.
+    Branchez-la sur l'imprimante.
+    En SSH, copiez les fichiers vers le dossier de config de l'imprimante :
+    bash
+     
+      
+     
+     
+    cp -r /tmp/udisk/sda1/Config_Klipper_Usine/* /usr/data/printer_data/config/
+     
+     
+    Redémarrez le service Klipper ou l'imprimante.
+
+⚠️ Avertissement et Mentions
+
+     Ces fichiers proviennent d'une carte mère CR4CU220812S12 neuve testée et fonctionnelle.
+     Le dump intégral contient les calibrations d'usine de la carte mère d'origine. Après une restauration complète (Méthode A), il est recommandé de refaire un auto-leveling (bed mesh) et de vérifier vos offsets de sonde (Z-offset) pour correspondre à votre machine physique.
+     L'auteur décline toute responsabilité en cas de dommage matériel. Cette procédure annule la garantie Creality.
+
