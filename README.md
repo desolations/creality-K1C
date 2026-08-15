@@ -101,3 +101,22 @@ Procédure :
     ATTENTION : Assurez-vous qu'il n'a aucune extension (pas de .txt à la fin). Si Windows cache les extensions, affichez-les dans l'explorateur pour être sûr.
     Copiez ce fichier à la racine de votre clé USB.
     Branchez la clé USB sur l'imprimante et allumez-la. Les tests de calibrage forcés seront automatiquement ignorés.
+
+
+🔓 Décryptage des Logs Cachés (Archives ZIP)
+
+Creality chiffre certaines archives de logs complètes (ou fichiers de configuration cachés) pour empêcher les utilisateurs de voir l'intégralité des données système de la machine. 
+
+Si vous avez extrait une archive .zip provenant de l'imprimante et qu'elle vous demande un mot de passe pour s'ouvrir, voici la clé de décompression (toujours fonctionnelle à ce jour) :
+
+    Mot de passe de l'archive ZIP : 
+
+    q!ew5rN7@U2s7;L
+
+Comment l'utiliser :
+
+    Téléchargez et installez le logiciel gratuit 7-Zip ou WinRAR sur votre PC Windows.
+    Faites un clic droit sur le fichier .zip protégé.
+    Choisissez "Extraire ici" (ou "Extraire vers...").
+    Une fenêtre va s'ouvrir vous demandant le mot de passe.
+    Copiez-collez la clé ci-dessus et validez. Vous aurez alors accès aux fichiers système et logs bruts non filtrés par Creality.
